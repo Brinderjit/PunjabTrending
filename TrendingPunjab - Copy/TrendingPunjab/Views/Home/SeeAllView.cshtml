@@ -1,0 +1,128 @@
+﻿@model IEnumerable<TrendingPunjab.Models.VideoModel>
+    @using TrendingPunjab.Helpers
+@{
+    ViewBag.Title = "SeeAllView";
+    Layout = "~/Views/Shared/_layoutNew.cshtml";
+    int i = 1;
+}
+<script src="~/Scripts/CustomScripts/LoadMore.js"></script>
+<style>
+    .resent-grid a img {
+    width: 100%;
+    height: 150px;
+}
+    
+</style>
+<div class="main-grids">
+    <div class="heading">
+        <h3>@ViewBag.Category</h3>
+        <input type="hidden" id="categoryHidden" value=@ViewBag.Category>
+    </div>
+    @if (Model.Any())
+    {
+        foreach (var batch in Model.Batch(6))
+        {
+            <div class="recommended">
+                <div class="recommended-grids english-grid">
+                    <div class="recommended-info">
+
+
+                        <div class="clearfix"> </div>
+                    </div>
+                    @foreach (var item in batch)
+                    {
+
+                        <div class="col-md-2 resent-grid recommended-grid sports-recommended-grid">
+                            <div class="resent-grid-img recommended-grid-img">
+                                <a href="\Video\SingleView?vid=@item.v_id"><img src="@item.thumbnail" alt="" /></a>
+                                <div class="time small-time sports-tome">
+                                    <p>7:30</p>
+                                </div>
+                                <div class="clck sports-clock">
+                                    <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                                </div>
+                            </div>
+                            <div class="resent-grid-info recommended-grid-info">
+                                <h5><a href="\Video\SingleView?vid=@item.v_id" class="title">\@item.v_title</a></h5>
+                                <!--<p class="author"><a href="#" class="author">John Maniya</a></p>-->
+                                <p class="views">@item.views</p>
+                            </div>
+                        </div>
+                    }
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <h5> No video for this category </h5>
+    }
+    
+
+
+ <p id="loadMore" style="text-align: center;background-color:white">
+
+        <a class="btn btn-primary btn-lg" style="background-color:#21deef;border-color:#21deef">
+            LoadMore &raquo;
+            <span>
+                <img id="loading" style="display: none;" src="~/Content/images/ajax-loader.gif" />
+            </span>
+        </a>
+
+    </p>
+
+
+ <!--   <div class="recommended">
+<div class="recommended-grids" style="margin-top:0px">
+    <div class="recommended-info">
+        <h3>@ViewBag.Category</h3>
+        <input type="hidden" id="categoryHidden" value=@ViewBag.Category>
+    </div>
+    @if(Model.Any())
+    {
+        foreach (var item in Model)
+        {
+
+            <div class="col-md-3 resent-grid recommended-grid">
+                <div class="resent-grid-img recommended-grid-img">
+                    <a href="\Video\SingleView?vid=@item.v_id"><img src=@item.thumbnail alt="" /></a>
+                    <div class="time small-time">
+                        <p>@item.playTime</p>
+                    </div>
+                    <div class="clck small-clck">
+                        <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <div class="resent-grid-info recommended-grid-info video-info-grid">
+                    <h5><a href="single.html" class="title">@item.v_title</a></h5>
+                    <ul>
+                        <li><p class="author author-info"><a href="#" class="author">John Maniya</a></p></li>
+                        <li class="right-list"><p class="views views-info">@item.views</p></li>
+                    </ul>
+                </div>
+            </div>
+
+
+        }
+    }
+    else
+    {
+        <h5> No video for this category </h5>
+    }
+
+            <div class="clearfix"> </div>
+        </div>
+        <br />
+      <!--  <p id="loadMore" style="text-align: center;background-color:white">
+
+            <a class="btn btn-primary btn-lg" style="background-color:#21deef;border-color:#21deef">
+                LoadMore &raquo;
+                <span>
+                    <img id="loading" style="display: none;" src="~/Content/images/ajax-loader.gif" />
+                </span>
+            </a>
+
+        </p>
+    </div>-->
+</div>

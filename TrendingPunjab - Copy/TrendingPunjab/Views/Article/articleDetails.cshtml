@@ -1,0 +1,22 @@
+﻿@model TrendingPunjab.Models.ArticleModel
+@{
+    ViewBag.Title = "ArticleDetails";
+    Layout = "~/Views/Shared/_layoutNew.cshtml";
+}
+
+
+
+<div class="show-top-grids">
+    <div class="main-grids news-main-grids">
+        <div class="recommended-info">
+            <h3>@Model.title</h3>
+           
+           @Html.Raw(Server.HtmlDecode(Model.content))
+           
+          
+         
+
+        </div>
+    </div>
+</div>
+

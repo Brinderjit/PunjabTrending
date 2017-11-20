@@ -1,0 +1,98 @@
+﻿
+@model TrendingPunjab.Models.ArticleModel
+@{
+    ViewBag.Title = "UpdateArticle";
+    Layout = "~/Views/Shared/_layoutNew.cshtml";
+}
+<script src="~/Scripts/CustomScripts/summernote.js"></script>
+<link href="~/Content/summernote/summernote.css" rel="stylesheet" />
+<link href="~/Content/font-awesome.css" rel="stylesheet" />
+
+<script>
+(function ($) {
+    function HomeIndex() {
+        var $this = this;
+
+        function initialize() {
+            $('#content').summernote({
+                focus: true,
+                height: 150,
+                codemirror: {
+                    theme: 'united'
+                }
+            });
+        }
+
+        $this.init = function () {
+            initialize();
+        }
+    }
+    $(function () {
+        var self = new HomeIndex();
+        self.init();
+    })
+}(jQuery))  </script>
+
+<h2>Edit Article</h2>
+<div class="panel panel-default">
+   
+    <div class="panel-body">
+        @using (Html.BeginForm(Html.BeginForm("updateArticle", "Article", System.Web.Mvc.FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" })))
+        {
+            <div class="form-horizontal">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.articleId, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-9">
+                        @Html.TextBoxFor(model => model.articleId, new { @class = "form-control", @readonly="readonly"})
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.title, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-9">
+                        @Html.TextBoxFor(model => model.title, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.content, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-9">
+                        @Html.TextAreaFor(model => model.content, new { @class = "form-control", @row = 5 })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fileUpload" class = "col-lg-2 control-label">Select Thumbnail</label>
+                    <div class="col-lg-9">
+                        <input type="file" name="thumbnail" id="thumbnailUpload" class="form-control" value="Choose file..">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-9"></div>
+                    <div class="col-lg-3">
+                        <button class="btn btn-normal" id="btnUpdate" type="submit" value="Update">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+                @if (ViewBag.message != null)
+                {
+                    if (ViewBag.message != 0)
+                    {
+
+
+                        <div class="alert alert-success alert-dismissable">
+                            <strong>Success!</strong> Article updated successfully.
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-danger alert-dismissable">
+                            <strong>Error occured!</strong>  Failed to update article.
+                        </div>
+                    }
+                }
+
+            </div>
+        }
+    </div>
+</div>
+
+}

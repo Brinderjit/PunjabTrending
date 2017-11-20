@@ -1,0 +1,240 @@
+﻿@model TrendingPunjab.Models.VideoListModel
+@using TrendingPunjab.Helpers
+    @using TrendingPunjab.Models
+@{
+    ViewBag.Title = "Home Page";
+    Random rand = new Random();
+    int i = 0;
+}
+
+
+<div class="main-grids">    
+  
+        @if (((List<VideoModel>)ViewBag.recentUploads).Any())
+        {
+            foreach (var batch in ((IEnumerable<VideoModel>)ViewBag.recentUploads).Batch(3))
+            {
+                <div class="top-grids" style="padding-bottom:15px">
+                   
+                    @if(i==0)
+                    {
+                    <div class="recommended-info">
+                        <h3>Recent Videos<a id="all" class="btn btn-link" href=@String.Format("\\Home\\SeeAllView?Category={0}", Server.UrlEncode("recent")) style="float:right">See All</a></h3>
+                    </div>
+                        i++;
+                    }
+                    @foreach (var item in batch)
+                    {
+                    <div class="col-md-4 resent-grid recommended-grid slider-top-grids">
+                        <div class="resent-grid-img recommended-grid-img">
+                            <a href="\Video\SingleView?vid=@item.v_id"><img src=@item.thumbnail alt="" /></a>
+                            <div class="time">
+                                <p>@item.playTime</p>
+                            </div>
+                            <div class="clck">
+                                <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <div class="resent-grid-info recommended-grid-info">
+                            <h3><a href="\Video\SingleView?vid=@item.v_id" class="title title-info">@item.v_title</a></h3>
+                            <ul>
+                                <li><p class="author author-info"><a href="#" class="author">John Maniya</a></p></li>
+                                <li class="right-list"><p class="views views-info">@item.views views</p></li>
+                            </ul>
+                        </div>
+                    </div>
+                    }
+                   
+                    <div class="clearfix"> </div>
+                </div>
+            }
+            i = 0;
+        }
+        else
+        {
+                    <h5> No video for this category </h5>
+                    }
+    
+    <div class="recommended">
+        <div class="recommended-grids">
+            <div class="recommended-info">
+                <h3>Animated Cartoon<a id="all" class="btn btn-link" href=@String.Format("\\Home\\SeeAllView?Category={0}", Server.UrlEncode("Film & Animation")) style="float:right">See All</a></h3>
+            </div>
+            <script src="~/Scripts/responsiveslides.min.js"></script>
+            <script>
+							// You can also use "$(window).load(function() {"
+							$(function () {
+							  // Slideshow 4
+							  $("#slider3").responsiveSlides({
+								auto: true,
+								pager: false,
+								nav: true,
+								speed: 500,
+								namespace: "callbacks",
+								before: function () {
+								  $('.events').append("<li>before event fired.</li>");
+								},
+								after: function () {
+								  $('.events').append("<li>after event fired.</li>");
+								}
+							  });
+
+							});
+            </script>
+            <div id="top" class="callbacks_container">
+                <ul class="rslides" id="slider3">
+
+
+                    @if (((List<VideoModel>)ViewBag.movies).Any())
+                    {
+                        foreach (var batch in ((IEnumerable<VideoModel>)ViewBag.movies).Batch(4))
+                        {
+                            <li>
+                                <div class="animated-grids">
+                                    @foreach (var item in batch)
+                                    {
+                                    <div class="col-md-3 resent-grid recommended-grid slider-first">
+                                        <div class="resent-grid-img recommended-grid-img">
+                                            <a href="\Video\SingleView?vid=@item.v_id"><img src=@item.thumbnail alt="" /></a>
+                                            <div class="time small-time slider-time">
+                                                <p>@item.playTime</p>
+                                            </div>
+                                            <div class="clck small-clck">
+                                                <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                                            </div>
+                                        </div>
+                                        <div class="resent-grid-info recommended-grid-info">
+                                            <h5><a href="\Video\SingleView?vid=@item.v_id" class="title">@item.v_title</a></h5>
+                                            <div class="slid-bottom-grids">
+                                                <div class="slid-bottom-grid">
+                                                    <p class="author author-info"><a href="#" class="author">John Maniya</a></p>
+                                                </div>
+                                                <div class="slid-bottom-grid slid-bottom-right">
+                                                    <p class="views views-info">@item.views views</p>
+                                                </div>
+                                                <div class="clearfix"> </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    }
+                                    <div class="clearfix"> </div>
+                                </div>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <h5> No video for this category </h5>
+                    }
+
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="recommended">
+        @if (((List<VideoModel>)ViewBag.punjabi).Any())
+        {
+            i = 0;
+
+            foreach (var batch in ((IEnumerable<VideoModel>)ViewBag.punjabi).Batch(4))
+            {
+                <div class="recommended-grids">
+                    @if (i == 0)
+                    {
+                        <div class="recommended-info">
+                            <h3>Punjabi<a id="all" class="btn btn-link" href=@String.Format("\\Home\\SeeAllView?Category={0}", Server.UrlEncode("Punjabi")) style="float:right">See All</a></h3>
+                        </div>
+                        i = 1;
+                    }
+                    @foreach (var item in batch)
+                    {
+                        <div class="col-md-3 resent-grid recommended-grid">
+                            <div class="resent-grid-img recommended-grid-img">
+                                <a href="\Video\SingleView?vid=@item.v_id"><img src="@item.thumbnail" alt="" /></a>
+                                <div class="time small-time">
+                                    <p>@item.playTime</p>
+                                </div>
+                                <div class="clck small-clck">
+                                    <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                                </div>
+                            </div>
+                            <div class="resent-grid-info recommended-grid-info video-info-grid">
+                                <h5><a href="\Video\SingleView?vid=@item.v_id" class="title">@item.v_title</a></h5>
+                                <ul>
+                                    <li><p class="author author-info"><a href="#" class="author">John Maniya</a></p></li>
+                                    <li class="right-list"><p class="views views-info">@item.views views</p></li>
+                                </ul>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="clearfix"> </div>
+            }
+        }
+        else
+        {
+            <div class="recommended-grids">
+
+                <div class="recommended-info">
+                    <h3>Punjabi<a id="all" class="btn btn-link" href=@String.Format("\\Home\\SeeAllView?Category={0}", Server.UrlEncode("Punjabi")) style="float:right">See All</a></h3>
+                </div>
+                <h5> No video for this category </h5>
+            </div>
+        }
+    </div>
+    <div class="recommended">
+      @if (((List<VideoModel>)ViewBag.sportList).Any())
+      {
+          i = 0;
+
+           foreach (var batch in ((IEnumerable<VideoModel>)ViewBag.sportList).Batch(4))
+           {
+            <div class="recommended-grids">
+                @if (i == 0)
+                {
+                <div class="recommended-info">
+                    <h3>Sports<a id="all" class="btn btn-link" href=@String.Format("\\Home\\SeeAllView?Category={0}", Server.UrlEncode("Sports")) style="float:right">See All</a></h3>
+                </div>
+                    i = 1;
+                }
+                @foreach (var item in batch)
+                {
+                    <div class="col-md-3 resent-grid recommended-grid">
+                        <div class="resent-grid-img recommended-grid-img">
+                            <a href="\Video\SingleView?vid=@item.v_id"><img src="@item.thumbnail" alt="" /></a>
+                            <div class="time small-time">
+                                <p>@item.playTime</p>
+                            </div>
+                            <div class="clck small-clck">
+                                <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <div class="resent-grid-info recommended-grid-info video-info-grid">
+                            <h5><a href="\Video\SingleView?vid=@item.v_id" class="title">@item.v_title</a></h5>
+                            <ul>
+                                <li><p class="author author-info"><a href="#" class="author">John Maniya</a></p></li>
+                                <li class="right-list"><p class="views views-info">@item.views views</p></li>
+                            </ul>
+                        </div>
+                    </div>
+                }
+            </div>
+                <div class="clearfix"> </div>
+           }
+      }
+      else
+        {
+        <div class="recommended-grids">
+
+            <div class="recommended-info">
+                <h3>Sports<a id="all" class="btn btn-link" href=@String.Format("\\Home\\SeeAllView?Category={0}", Server.UrlEncode("Sports")) style="float:right">See All</a></h3>
+            </div>
+            <h5> No video for this category </h5>
+        </div> 
+      }
+            </div>
+
+  
+    </div>
